@@ -1,4 +1,5 @@
-package com.example.jwtst.service;
+package com.example.jwtst.config;
+import com.example.jwtst.service.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -9,22 +9,26 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     @Autowired
     private CustomAuthenticationProvider customAuthenticationProvider;
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//            http.csrf(csrf -> csrf.disable()) // Disable CSRF protection
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/auth/login").permitAll() // Allow access to /auth/login
-//                        .anyRequest().authenticated() // Require authentication for all other endpoints
-//                );
-//
-//        return http.build();
-//    }
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+                .requestMatchers("/auth/login").permitAll() // Cho phép truy cập vào đường dẫn đăng nhập
+                .anyRequest().authenticated() // Tất cả các yêu cầu khác đều cần xác thực
+                .and()
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Thêm bộ lọc JWT
+
+        return http.build();
+    }
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder =
