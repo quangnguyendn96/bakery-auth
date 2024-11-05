@@ -14,7 +14,8 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtils {
-    private static final String SECRET_KEY = "quang-deptrai-vli-ay-tuiasdzxjckjsdlhashd-123123"; // Thay thế bằng secret key thật
+
+    private static final String SECRET_KEY = "quang-depttria-vli-ay-tuiasdzxjckjsdlhashd-123123"; // Thay thế bằng secret key thật
     private static final long EXPIRATION_TIME = 86400000; // 1 ngày
     String encodedSecretKey = Base64.getEncoder().encodeToString(SECRET_KEY.getBytes());
     // Tạo JWT từ username
