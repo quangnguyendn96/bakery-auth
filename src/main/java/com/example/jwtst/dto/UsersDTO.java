@@ -2,5 +2,6 @@ package com.example.jwtst.dto;
 
 public class UsersDTO {
     private String name;
-    private String cccd;
+    private String password;
+    private Long age;
 }
