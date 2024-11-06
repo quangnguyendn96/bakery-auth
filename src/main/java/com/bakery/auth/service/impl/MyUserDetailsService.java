@@ -1,7 +1,7 @@
-package com.example.jwtst.service.impl;
+package com.bakery.auth.service.impl;
 
-import com.example.jwtst.entity.UsersEntity;
-import com.example.jwtst.repository.jpa.UsersRepository;
+import com.bakery.auth.entity.UsersEntity;
+import com.bakery.auth.repository.jpa.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,8 +17,7 @@ public class MyUserDetailsService implements UserDetailsService {
     UsersRepository usersRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Tìm người dùng trong cơ sở dữ liệu
-        UsersEntity user = usersRepository.getByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
+        UsersEntity user = usersRepository.findByUsername(username).orElse(null);
+        return user == null ? null : new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
 }

@@ -1,5 +1,5 @@
-package com.example.jwtst.config;
-import com.example.jwtst.service.JwtUtils;
+package com.bakery.auth.config;
+import com.bakery.auth.service.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtils jwtUtils;

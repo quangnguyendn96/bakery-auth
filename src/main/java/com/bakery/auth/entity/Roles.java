@@ -1,4 +1,4 @@
-package com.example.jwtst.entity;
+package com.bakery.auth.entity;
 
 import jakarta.persistence.*;
 

@@ -1,4 +1,4 @@
-package com.example.jwtst.config;
+package com.bakery.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -12,13 +12,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-
     @Autowired
     private UserDetailsService userDetailsService; // Inject your UserDetailsService
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder; // Inject your PasswordEncoder
-
+    @Autowired
+    private PasswordEncoder passwordEncoder; // Inject your PasswordEncoder
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
@@ -27,7 +25,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         // Load user details from the database
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         // Check if the provided password matches the stored password
-        if (userDetails != null) {
+        if (userDetails != null && passwordEncoder.matches(password, userDetails.getPassword())) {
             // If authentication is successful, return an authenticated token
             return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
         } else {
