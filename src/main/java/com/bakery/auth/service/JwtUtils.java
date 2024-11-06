@@ -1,4 +1,4 @@
-package com.example.jwtst.service;
+package com.bakery.auth.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

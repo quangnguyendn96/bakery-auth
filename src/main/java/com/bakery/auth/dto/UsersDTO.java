@@ -1,4 +1,4 @@
-package com.example.jwtst.dto;
+package com.bakery.auth.dto;
 
 public class UsersDTO {
     private String name;
