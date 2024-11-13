@@ -13,5 +13,6 @@ public class UsersEntity {
     private Long userId;
     private String username;
     private String password;
+    private String email;
 }
 
