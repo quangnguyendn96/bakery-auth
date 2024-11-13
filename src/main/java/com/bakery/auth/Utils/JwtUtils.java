@@ -1,4 +1,4 @@
-package com.bakery.auth.service;
+package com.bakery.auth.Utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

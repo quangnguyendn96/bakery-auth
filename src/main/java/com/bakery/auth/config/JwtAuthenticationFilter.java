@@ -1,5 +1,5 @@
 package com.bakery.auth.config;
-import com.bakery.auth.service.JwtUtils;
+import com.bakery.auth.Utils.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

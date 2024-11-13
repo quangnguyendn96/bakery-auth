@@ -3,7 +3,7 @@ package com.bakery.auth.controller;
 import com.bakery.auth.dto.UserLogin;
 import com.bakery.auth.repository.jpa.UsersRepository;
 import com.bakery.auth.service.UsersService;
-import com.bakery.auth.service.JwtUtils;
+import com.bakery.auth.Utils.JwtUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
