@@ -28,14 +28,13 @@ public class SecurityConfig {
     private JwtAuthenticationFilter jwtRequestFilter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/auth/**").permitAll() // Cho phép truy cập vào đường dẫn đăng nhập
-                .anyRequest().authenticated() // Tất cả các yêu cầu khác đều cần xác thực
-                .and()
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Thêm bộ lọc JWT
-
-        return http.build();
+        return http.csrf().disable()
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/auth/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class) // Thêm bộ lọc JWT
+                .build();
     }
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {

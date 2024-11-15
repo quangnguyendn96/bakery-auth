@@ -5,15 +5,18 @@ import com.bakery.auth.repository.jpa.UsersRepository;
 import com.bakery.auth.service.UsersService;
 import com.bakery.auth.Utils.JwtUtils;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -30,14 +33,9 @@ public class AuthController {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
     private UsersRepository usersRepository;
-
     @Autowired
     private UsersService usersService;
-
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody UserLogin request) {
 
@@ -62,6 +60,11 @@ public class AuthController {
         }
         usersService.createUser(userLogin);
         return new ResponseEntity<>("Create success", HttpStatus.OK);
+    }
+    @PostMapping("/delete")
+    public String delete(@RequestParam String userLogin) {
+        usersService.deleteUser(userLogin);
+        return "Delete ok";
     }
 }
 
